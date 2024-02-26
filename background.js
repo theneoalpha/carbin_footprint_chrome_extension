@@ -28,3 +28,19 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     sendResponse({ totalTime: elapsedTime });
   }
 });
+// background.js
+// ... (previous code)
+
+chrome.runtime.onInstalled.addListener(function () {
+  // Reset total time on extension installation
+  chrome.storage.local.set({ startTime: Date.now() });
+});
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.action === "getTotalTime") {
+    const startTime = Number(localStorage.getItem("startTime")) || Date.now();
+    const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Convert to seconds
+    sendResponse({ totalTime: elapsedTime });
+  }
+});
+
