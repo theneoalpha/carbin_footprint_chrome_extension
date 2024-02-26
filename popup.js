@@ -1,23 +1,20 @@
 // popup.js
-document.addEventListener('DOMContentLoaded', function() {
-    var calculateButton = document.getElementById('calculate');
-    var distanceInput = document.getElementById('distance');
-    var resultDiv = document.getElementById('result');
+document.addEventListener("DOMContentLoaded", function () {
+    chrome.runtime.sendMessage({ action: "getTotalTime" }, function (response) {
+      const timeElement = document.getElementById("time");
+      const carbonElement = document.getElementById("carbon");
   
-    calculateButton.addEventListener('click', function() {
-      var distance = parseFloat(distanceInput.value);
-      if (!isNaN(distance)) {
-        var carbonFootprint = calculateCarbonFootprint(distance);
-        resultDiv.innerHTML = 'Your carbon footprint is: ' + carbonFootprint.toFixed(2) + ' kg CO2';
-      } else {
-        resultDiv.innerHTML = 'Please enter a valid distance.';
-      }
+      timeElement.textContent = `${response.totalTime} seconds`;
+  
+      const carbon = calculateCarbonFootprint(response.totalTime);
+      carbonElement.textContent = `${carbon.toFixed(2)} kgCO2`;
     });
-  
-    function calculateCarbonFootprint(distance) {
-      // Replace this with your actual carbon footprint calculation logic
-      // For example: 0.2 kg CO2 per km
-      return distance * 0.2;
-    }
   });
+  
+  // Calculate carbon footprint (a simple example)
+  function calculateCarbonFootprint(time) {
+    // This is a placeholder function; you should replace it with a more accurate calculation.
+    // The formula here is just for illustration.
+    return time / 3600; // Assuming 1 kgCO2 per hour of browsing
+  }
   
