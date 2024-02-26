@@ -1,0 +1,28 @@
+/* popup.css */
+body {
+    width: 200px;
+    height: 150px;
+    margin: 0;
+    background-color: rgb(208, 192, 192);
+    padding: 0;
+    border-radius: 12px;
+  }
+  
+  #content {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  h2 {
+    color: #0b3d0b;
+  }
+  
+  p {
+    color: #095304;
+    margin: 5px 0;
+  }
+  
+  span {
+    font-weight: bold;
+  }
+  
